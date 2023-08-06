@@ -1,8 +1,97 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<TodoItem>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 2px solid #dee2e6;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .done {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .delete-link {
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        .todo-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Todo List</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Is Done</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>
+                    @if (item.IsDone)
+                    {
+                        <span class="done">Done</span>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("MarkAsDone", "Home", new { id = item.ID })" class="mark-done-link">Mark as Done</a>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "delete-link" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <h2>Add New Todo Item</h2>
+    @using (Html.BeginForm("Create", "Home", FormMethod.Post, new { @class = "todo-form" }))
+    {
+        <div>
+            <div>
+                <label>Title:</label>
+                <input type="text" name="Title" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" />
+            </div>
+            <div>
+                <label>Description:</label>
+                <input type="text" name="Description" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" />
+            </div>
+            <input type="submit" value="Add" style="background-color: #007bff; color: #fff; border: none; cursor: pointer; padding: 8px 16px; border-radius: 5px; margin-top: 10px;" />
+        </div>
+    }
+</body>
+</html>
