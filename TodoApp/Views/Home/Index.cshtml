@@ -6,7 +6,9 @@
     <title>Todo App</title>
     <style>
         body {
-            background-color: #f2f2f2;
+            background-color: #dcdcdc; /* Darker background color */
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
         }
 
         h2 {
@@ -19,6 +21,7 @@
             border-collapse: collapse;
             margin-bottom: 20px;
             border: 2px solid #dee2e6;
+            background-color: #fff; /* White background color for the table */
         }
 
         th, td {
@@ -43,6 +46,28 @@
         .todo-form {
             max-width: 400px;
             margin: 0 auto;
+            background-color: #fff; /* White background color for the form */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Wider submit button */
+        .todo-form input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        /* Style for mark-done and delete links */
+        .mark-done-link,
+        .delete-link {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -90,7 +115,7 @@
                 <label>Description:</label>
                 <input type="text" name="Description" required style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" />
             </div>
-            <input type="submit" value="Add" style="background-color: #007bff; color: #fff; border: none; cursor: pointer; padding: 8px 16px; border-radius: 5px; margin-top: 10px;" />
+            <input type="submit" value="Add" />
         </div>
     }
 </body>
